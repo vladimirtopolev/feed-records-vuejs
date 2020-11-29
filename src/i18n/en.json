@@ -1,0 +1,12 @@
+{
+    "form": {
+        "cancel": "Cancel",
+        "create": "Create",
+        "prevStep": "Prev step",
+        "nextStep": "Next step"
+    },
+    "recordModule": {
+        "createNewRecordSetModal_btn": "Create new record",
+        "createNewRecordSetModal_title": "Create new record"
+    }
+}
