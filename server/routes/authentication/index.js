@@ -1,8 +1,7 @@
 const express = require('express');
-const jwt = require('json-web-token');
-const { USERS } = require('../users');
+const jwt = require('jsonwebtoken');
+const { USERS } = require('../../entities');
 const { ACCESS_TOKEN_SECRET, ACCESS_TOKEN_LIFE, REFRESH_TOKEN_LIFE, REFRESH_TOKEN_SECRET } = require('../../config');
-
 
 const REFRESH_TOKENS = {};
 const router = express.Router();
@@ -33,6 +32,13 @@ router.post('/login', (req, res) => {
         expiresIn: REFRESH_TOKEN_LIFE
     });
 
-    res.cookie("jwt", accessToken, { secure: true, httpOnly: true })
+    res.cookie('jwt', accessToken, { secure: true, httpOnly: true })
     res.json(user);
 });
+
+router.get('/logout', (req, res) => {
+    res.clearCookie('jwt');
+    res.json();
+});
+
+module.exports = router;

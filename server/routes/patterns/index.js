@@ -1,15 +1,13 @@
 const express = require('express')
 const router = express.Router();
-const { PATTERNS } = require('./entities');
-
-let _PATTERNS = [...PATTERNS];
+const { PATTERNS } = require('../../entities');
 
 router.get('/', (req, res) => {
     res.send({
-        items: _PATTERNS,
-        count: _PATTERNS.length,
+        items: PATTERNS,
+        count: PATTERNS.length,
         offset: 0,
-        limit: _PATTERNS.length
+        limit: PATTERNS.length
     });
 });
 

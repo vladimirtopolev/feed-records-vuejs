@@ -6,8 +6,8 @@ const USERS = [
         id: 1,
         firstName: 'Vlad',
         lastName: 'Topolev',
-        email: 'topolev@mail.ru',
-        password: '123'
+        email: 'test',
+        password: 'test'
     }
 ];
 

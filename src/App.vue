@@ -11,6 +11,8 @@ export default {
   components: {
     PageLayout
   },
-
+  beforeMount() {
+    this.$store.dispatch('initUser');
+  }
 };
 </script>

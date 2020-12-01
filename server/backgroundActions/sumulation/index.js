@@ -1,4 +1,4 @@
-const entities = require('../../routes/records/entities');
+const entities = require('../../entities');
 const { SIMULATION_STATES } = entities;
 
 module.exports = function () {

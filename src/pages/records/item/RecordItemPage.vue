@@ -12,13 +12,14 @@
       <v-col cols="2" class="d-flex justify-center">
         <PanelRecordState
             :item="item"
-            @changeProcessState="(state)=> onChangeProcessState('recordState', state)"
+            @changeProcessState="(state)=> onChangeItemField('recordState', state)"
         />
       </v-col>
       <v-col>
         <PanelSimulationState
             :item="item"
-            @changeProcessState="(state)=> onChangeProcessState('simulationState', state)"
+            @changeProcessState="(state)=> onChangeItemField('simulationState', state)"
+            @changeStep="(step)=>onChangeItemField('simulationStep', step)"
         />
       </v-col>
     </v-row>
@@ -40,9 +41,8 @@ export default {
   components: { PanelRecordState, PanelSimulationState, FeedsMetaTable },
   methods: {
     ...mapActions(['getItem', 'editItem']),
-    onChangeProcessState(processName, newState) {
-      console.log('PR NAME', processName);
-      this.editItem({ ...this.item, [processName]: newState });
+    onChangeItemField(fieldName, newValue) {
+      this.editItem({ ...this.item, [fieldName]: newValue });
     }
   },
   data() {
@@ -65,4 +65,5 @@ export default {
     clearInterval(this.interval);
   }
 }
+
 </script>

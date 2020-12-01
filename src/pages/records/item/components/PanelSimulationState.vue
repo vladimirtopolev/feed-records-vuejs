@@ -18,13 +18,15 @@
       <SimulationProgressBar
           :count-steps="item.recordStep"
           :simulation-step="item.simulationStep"
+          :labels="item.labels"
+          @changeStep="(step) => $emit('changeStep', step)"
       />
     </div>
   </v-container>
 </template>
 <script>
 import ProcessStateButtons from "@/pages/records/common/ProcessStateButtons";
-import SimulationProgressBar from '@/pages/records/item/components/SimulationProgressBar';
+import SimulationProgressBar from '@/pages/records/item/components/simulation-progress-bar/SimulationProgressBar';
 
 export default {
   components: { ProcessStateButtons, SimulationProgressBar },

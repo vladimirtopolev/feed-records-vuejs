@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router();
 const { createdPaginatedResponseFromRequest } = require('../../helpers/createPaginatedResponse');
-const entities = require('./entities');
+const entities = require('../../entities');
 const { v4 } = require("uuid")
 const { RECORD_STATES, SIMULATION_STATES } = entities;
 

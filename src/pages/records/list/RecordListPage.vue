@@ -69,7 +69,7 @@ export default {
   },
   mounted() {
     this.getItems();
-    this.interval = setInterval(() => this.getItems(), 1000);
+    this.interval = setInterval(() => this.getItems(), 5000);
   },
   beforeDestroy() {
     clearInterval(this.interval);

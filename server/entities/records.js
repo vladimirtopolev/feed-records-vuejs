@@ -21,8 +21,8 @@ module.exports = {
             id: `${i + 1}`,
             name: `Record ${i + 1}`,
             recordState: RECORD_STATES.NOT_STARTED,
-            recordStep: 0,
-            simulationState: SIMULATION_STATES.NOT_AVAILABLE,
+            recordStep: 100,
+            simulationState: SIMULATION_STATES.NOT_STARTED,
             created: new Date(),
             feedsMeta: Array.from({ length: FEEDS_COUNT })
                 .map((_, i) => ({
@@ -30,6 +30,13 @@ module.exports = {
                     feedUrl: `http://site.com/${i + 1}`,
                     fileName: `feedName-${i + 1}`
                 })),
-            recordedFeeds: []
+            recordedFeeds: [],
+            labels: [
+                {step: 1, label: 'Start game'},
+                {step: 10, label: 'Start of 1st period'},
+                {step: 20, label: 'Goal 0:1'},
+                {step: 50, label: 'Start of 2nd period'},
+                {step: 70, label: 'Finished of 2nd period'}
+            ]
         }))
 }

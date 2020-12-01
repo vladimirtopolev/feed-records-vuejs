@@ -1,1 +1,3 @@
-export const API_HOST = 'http://localhost:3000';
+import {PORT} from '../../server/config';
+
+export const API_HOST = `http://localhost:${PORT}`;
