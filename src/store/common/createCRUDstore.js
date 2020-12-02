@@ -63,6 +63,7 @@ export default function createCRUDstore(API) {
             ctx.commit(SET_LOADING_STATUS);
             return API.getItems(payload?.limit, payload?.offset)
                 .then((list) => {
+                    console.log(list)
                     ctx.commit(SET_ITEMS, list)
                 })
                 .catch((e) => {

@@ -4,6 +4,8 @@
       {{ value }}
     </slot>
     <v-text-field
+        dense
+        hide-details
         v-if="isEditMode"
         v-model="internalValue"/>
     <v-btn
@@ -21,7 +23,7 @@
         class="mx-2"
         @click="onSave"
     >
-      Save
+      <slot name="saveBtn">Save</slot>
     </v-btn>
     <v-btn
         v-if="isEditMode"
@@ -30,7 +32,7 @@
         class="mx-2"
         @click="toggleState"
     >
-      Cancel
+      <slot name="cancelBtn"> Cancel</slot>
     </v-btn>
   </div>
 </template>

@@ -10,6 +10,7 @@ const app = express();
 const usersRoute = require('./routes/users');
 const recordRoute = require('./routes/records');
 const patternRoute = require('./routes/patterns');
+const labelsRoute = require('./routes/labels');
 const authenticationRoute = require('./routes/authentication');
 
 app.use(cors());
@@ -26,6 +27,8 @@ app.use('/', authenticationRoute);
 app.use('/users', usersRoute);
 app.use('/records', recordRoute);
 app.use('/patterns', patternRoute);
+app.use('/labels', labelsRoute);
+
 
 
 app.listen(PORT, () => {

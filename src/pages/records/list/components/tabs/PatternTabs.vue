@@ -27,7 +27,6 @@ import { createNamespacedHelpers } from 'vuex';
 import { DOMAIN_NAME } from '@/store/patterns';
 import TableHeader from '../pattern-list-table/TableHeader';
 import TableContent from '../pattern-list-table/TableContent';
-//import CreateRecordModal from '../create-record-modal/CreateRecordModal';
 
 const { mapState, mapActions } = createNamespacedHelpers(DOMAIN_NAME)
 
