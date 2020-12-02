@@ -61,6 +61,29 @@ router.get('/:recordId/feedsMeta', (req, res) => {
     res.send(createdPaginatedResponseFromRequest(req, record.feedsMeta));
 });
 
+router.post('/:recordId/feedsMeta', (req, res) => {
+    const recordId = req.params.recordId;
+    const editedMeta = req.body.feedMeta;
+    const targetRecord = entities.RECORDS.find(rec => rec.id === recordId);
+
+    if (editedMeta.id) {
+        targetRecord.feedsMeta = targetRecord.feedsMeta.map(meta => meta.id === editedMeta.id ? editedMeta : meta);
+    } else {
+        targetRecord.feedsMeta.push({ ...editedMeta, id: v4() })
+    }
+    res.send(targetRecord);
+});
+
+router.delete('/:recordId/feedsMeta', (req, res) => {
+    const recordId = req.params.recordId;
+    const editedFeedMeta = req.body.feedMeta;
+    const targetRecord = entities.RECORDS.find(rec => rec.id === recordId);
+
+    targetRecord.feedsMeta = targetRecord.feedsMeta
+        .filter(meta => meta.id !== editedFeedMeta.id)
+    res.send(targetRecord);
+});
+
 router.post('/:recordId/labels', (req, res) => {
     const recordId = req.params.recordId;
     const newLabel = req.body.label;

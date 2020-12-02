@@ -1,5 +1,5 @@
 <template>
-  <v-container :style="{border: '1px solid #efefef'}" class="pa-4 text-center d-flex flex-column justify-center">
+  <v-container :style="{border: '1px solid #efefef'}" class="pa-4 text-center d-flex flex-column justify-center elevation-2">
     <h3>Record state</h3>
     <div class="text-center">
       <ProcessStateButtons

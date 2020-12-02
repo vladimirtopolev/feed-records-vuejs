@@ -31,6 +31,7 @@
 </template>
 <script>
 import PreviewFilledPattern from './PreviewFilledPattern';
+import { v4 } from 'uuid';
 
 export default {
   components: { PreviewFilledPattern },
@@ -55,7 +56,7 @@ export default {
     },
     fillPatternFeeds() {
       const variables = this.variables;
-      this.handledFeeds = this.pattern.feeds.map((feed) => {
+      this.handledFeeds = this.pattern.feedsMeta.map((feed) => {
         let feedUrl = feed.feedUrl;
         let fileName = feed.fileName;
         variables.map(({ key }, i) => {
@@ -64,7 +65,7 @@ export default {
           feedUrl = feedUrl.replaceAll(placeholder, value);
           fileName = fileName.replaceAll(placeholder, value);
         });
-        return { fileName, feedUrl };
+        return { fileName, feedUrl, id: v4() };
       });
       this.$emit('changeFeedsMeta', this.handledFeeds);
     }

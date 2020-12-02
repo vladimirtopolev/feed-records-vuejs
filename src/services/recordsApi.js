@@ -24,6 +24,27 @@ export const recordApi = {
             .then(res => res.json());
     },
 
+    createRecord(item) {
+        return fetch(`${API_HOST}/records`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify({ item })
+        })
+            .then(res => res.json());
+    },
+
+    getRecord(itemId) {
+        return fetch(`${API_HOST}/records/${itemId}`)
+            .then(res => res.json())
+    },
+
+    getRecordFeeds(recordId, limit = 100, offset = 0) {
+        fetch(`${API_HOST}/records/${recordId}?limit=${limit}&offset=${offset}`)
+            .then(res => res.json())
+    },
+
     editRecordLabel(recordId, label) {
         return fetch(`${API_HOST}/records/${recordId}/labels`, {
             method: 'POST',
@@ -46,24 +67,25 @@ export const recordApi = {
             .then(res => res.json())
     },
 
-    createRecord(item) {
-        return fetch(`${API_HOST}/records`, {
+    editFeedMeta(recordId, feedMeta) {
+        return fetch(`${API_HOST}/records/${recordId}/feedsMeta`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json;charset=utf-8'
             },
-            body: JSON.stringify({ item })
+            body: JSON.stringify({ feedMeta })
         })
-            .then(res => res.json());
-    },
-
-    getRecord(itemId) {
-        return fetch(`${API_HOST}/records/${itemId}`)
             .then(res => res.json())
     },
 
-    getRecordFeeds(recordId, limit = 100, offset = 0) {
-        fetch(`${API_HOST}/records/${recordId}?limit=${limit}&offset=${offset}`)
+    deleteFeedMeta(recordId, feedMeta) {
+        return fetch(`${API_HOST}/records/${recordId}/feedsMeta`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify({ feedMeta })
+        })
             .then(res => res.json())
     }
 }

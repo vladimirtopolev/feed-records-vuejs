@@ -24,20 +24,24 @@ module.exports = Array.from({ length: PATTERNS_COUNT })
             },
             ...(() => i % 2 === 0 ? [{ key: 'testField' }] : [])()
         ],
-        feeds: [
+        feedsMeta: [
             {
+                id: '1',
                 fileName: 'schedule-${seasonId}',
                 feedUrl: 'http://sport.com/${seasonId}'
             },
             {
+                id: '2',
                 fileName: 'game-info-${matchId}',
                 feedUrl: 'http://sport.com/game-info/${matchId}'
             },
             {
+                id: '3',
                 fileName: 'team-stats-${teamHomeId}',
                 feedUrl: 'http://sport.com/team-stats/${gameInfo}/${teamHomeId}'
             },
             {
+                id: '3',
                 fileName: 'team-stats-${teamAwayId}',
                 feedUrl: 'http://sport.com/team-stats/${gameInfo}/${teamAwayId}'
             }

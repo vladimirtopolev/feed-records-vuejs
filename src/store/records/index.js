@@ -18,7 +18,20 @@ const actions = {
             .then(record => {
                 ctx.commit(AvailableMutations.SET_ITEM, record)
             })
-    }
+    },
+    editFeedMeta(ctx, { feedMeta, recordId }) {
+        console.log(recordId, feedMeta)
+        recordApi.editFeedMeta(recordId, feedMeta)
+            .then(record => {
+                ctx.commit(AvailableMutations.SET_ITEM, record)
+            });
+    },
+    deleteFeedMeta(ctx, { feedMeta, recordId }) {
+        recordApi.deleteFeedMeta(recordId, feedMeta)
+            .then(record => {
+                ctx.commit(AvailableMutations.SET_ITEM, record)
+            })
+    },
 }
 export default {
     namespaced: true,

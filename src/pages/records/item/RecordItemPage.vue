@@ -3,10 +3,19 @@
     <v-btn
         rounded
         link
+        class="my-4"
         to="/records">
       Back to list
     </v-btn>
-    <h1 class="my-2">{{ item.name }}</h1>
+
+    <InputFieldWithBtn
+        :value="item.name"
+        @save="(val) => onChangeItemField('name', val)"
+        v-slot:default="{value}"
+    >
+      <h1>{{ value }}</h1>
+    </InputFieldWithBtn>
+
 
     <v-row class="align-stretch">
       <v-col cols="2" class="d-flex justify-center">
@@ -24,7 +33,7 @@
       </v-col>
     </v-row>
 
-    <FeedsMetaTable :items="item.feedsMeta"/>
+    <FeedsMetaTable :item="item"/>
   </v-container>
 </template>
 <script>
@@ -34,20 +43,24 @@ import FeedsMetaTable from './components/FeedsMetaTable';
 import { DOMAIN_NAME } from '@/store/records';
 import PanelRecordState from "@/pages/records/item/components/PanelRecordState";
 import PanelSimulationState from "@/pages/records/item/components/PanelSimulationState";
+import InputFieldWithBtn from "@/components/InputFieldWithBtn";
 
 const { mapActions, mapState } = createNamespacedHelpers(DOMAIN_NAME);
 
 export default {
-  components: { PanelRecordState, PanelSimulationState, FeedsMetaTable },
+  components: { PanelRecordState, PanelSimulationState, FeedsMetaTable, InputFieldWithBtn },
   methods: {
     ...mapActions(['getItem', 'editItem']),
     onChangeItemField(fieldName, newValue) {
+      console.log('hhh', fieldName, newValue)
       this.editItem({ ...this.item, [fieldName]: newValue });
     }
   },
   data() {
     return {
-      interval: null
+      interval: null,
+      isEdit: false,
+      title: ''
     }
   },
   computed: {
