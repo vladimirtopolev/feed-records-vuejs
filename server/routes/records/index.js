@@ -23,6 +23,7 @@ router.post('/', (req, res) => {
     if (!newItem.feedsMeta) {
         newItem.feedsMeta = [];
     }
+    newItem.labels = [];
     entities.RECORDS = entities.RECORDS.concat(newItem);
     res.json(newItem);
 })
@@ -42,9 +43,12 @@ router.delete('/:recordId', (req, res) => {
 
 router.put('/:recordId', (req, res) => {
     const recordId = req.params.recordId;
-    const newItem = req.body.item;
+    const prevItem = entities.RECORDS.find(rec => rec.id === recordId);
+    const newItem = { ...prevItem, ...req.body.item };
 
-    if (newItem.simulationState === SIMULATION_STATES.NOT_STARTED) {
+    if (newItem.simulationState === SIMULATION_STATES.NOT_STARTED
+        && prevItem.simulationState !== SIMULATION_STATES.NOT_STARTED
+        && prevItem.simulationState !== SIMULATION_STATES.NOT_AVAILABLE) {
         newItem.simulationStep = 0;
     }
     entities.RECORDS = entities.RECORDS.map(r => r.id === recordId ? newItem : r);
@@ -55,6 +59,28 @@ router.get('/:recordId/feedsMeta', (req, res) => {
     const recordId = req.params.recordId;
     const record = entities.RECORDS.find(rec => rec.id === recordId);
     res.send(createdPaginatedResponseFromRequest(req, record.feedsMeta));
+});
+
+router.post('/:recordId/labels', (req, res) => {
+    const recordId = req.params.recordId;
+    const newLabel = req.body.label;
+    const targetRecord = entities.RECORDS.find(r => r.id === recordId);
+
+    const existedLabelIndex = targetRecord.labels.findIndex(l => l.step === newLabel.step);
+    if (existedLabelIndex === -1) {
+        targetRecord.labels.push(newLabel);
+    } else {
+        targetRecord.labels.splice(existedLabelIndex, 0, newLabel);
+    }
+    res.send(targetRecord);
+});
+
+router.delete('/:recordId/labels', (req, res) => {
+    const recordId = req.params.recordId;
+    const deletedLabel = req.body.label;
+    const targetRecord = entities.RECORDS.find(r => r.id === recordId);
+    targetRecord.labels = targetRecord.labels.filter(l => l.step !== deletedLabel.step);
+    res.send(targetRecord);
 });
 
 module.exports = router;

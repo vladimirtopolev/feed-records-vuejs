@@ -24,6 +24,28 @@ export const recordApi = {
             .then(res => res.json());
     },
 
+    editRecordLabel(recordId, label) {
+        return fetch(`${API_HOST}/records/${recordId}/labels`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify({ label })
+        })
+            .then(res => res.json())
+    },
+
+    deleteRecordLabel(recordId, label) {
+        return fetch(`${API_HOST}/records/${recordId}/labels`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify({ label })
+        })
+            .then(res => res.json())
+    },
+
     createRecord(item) {
         return fetch(`${API_HOST}/records`, {
             method: 'POST',

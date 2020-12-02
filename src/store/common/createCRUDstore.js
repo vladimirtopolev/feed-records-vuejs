@@ -72,7 +72,6 @@ export default function createCRUDstore(API) {
         getItem(ctx, itemId) {
             return API.getItem(itemId)
                 .then(item => {
-                    console.log(item);
                     ctx.commit(SET_ITEM, item);
                 })
         },
@@ -106,6 +105,7 @@ export default function createCRUDstore(API) {
     }
 
     return {
+        AvailableMutations,
         actions,
         state,
         mutations

@@ -1,78 +1,33 @@
 <template>
-  <div>
-    <v-container class="my-4">
-      <CreateRecordModal/>
-      <v-simple-table class="my-4">
-        <template v-slot:default>
-          <TableHeader/>
-          <TableContent
-              :items="items"
-              @deleteItem="onDeleteItem"
-              @editItem="editItem"
-          />
-        </template>
-      </v-simple-table>
-    </v-container>
-    <v-container>
-      <v-pagination
-          class="ma-4"
-          v-model="page"
-          :length="countPages"
-      />
-    </v-container>
-  </div>
+  <v-container>
+    <v-tabs
+        v-model="tab"
+        align-with-title
+    >
+      <v-tab :key="0">Record</v-tab>
+      <v-tab :key="1">Patterns</v-tab>
+    </v-tabs>
+
+    <v-tabs-items v-model="tab">
+      <v-tab-item :key="0">
+        <RecordsTab/>
+      </v-tab-item>
+      <v-tab-item :key="1">
+        <PatternTabs/>
+      </v-tab-item>
+    </v-tabs-items>
+  </v-container>
 </template>
 <script>
-import { createNamespacedHelpers } from 'vuex';
-import { DOMAIN_NAME } from '@/store/records';
-import TableHeader from './components/TableHeader';
-import TableContent from './components/TableContent';
-import CreateRecordModal from './components/create-record-modal/CreateRecordModal';
-
-const { mapState, mapActions } = createNamespacedHelpers(DOMAIN_NAME)
+import RecordsTab from '@/pages/records/list/components/tabs/RecordsTab'
+import PatternTabs from '@/pages/records/list/components/tabs/PatternTabs'
 
 export default {
-  components: { TableHeader, TableContent, CreateRecordModal },
+  components: { RecordsTab, PatternTabs },
   data() {
     return {
-      page: 1,
-      interval: null
+      tab: 0
     }
-  },
-  methods: {
-    ...mapActions(['getItems', 'deleteItem', 'editItem']),
-    onDeleteItem(item) {
-      this.deleteItem(item)
-          .then(() => {
-            this.getItems({ offset: this.offset, limit: this.limit })
-          })
-    }
-  },
-  computed: {
-    ...mapState({
-      items: s => s.items,
-      count: s => s.count,
-      offset: s => s.offset,
-      limit: s => s.limit
-    }),
-    countPages() {
-      return Math.ceil(this.count / this.limit);
-    }
-  },
-  watch: {
-    page() {
-      this.getItems({
-        offset: (this.page - 1) * this.limit,
-        limit: this.limit
-      })
-    }
-  },
-  mounted() {
-    this.getItems();
-    this.interval = setInterval(() => this.getItems(), 5000);
-  },
-  beforeDestroy() {
-    clearInterval(this.interval);
   }
 }
 </script>

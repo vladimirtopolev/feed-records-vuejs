@@ -11,6 +11,7 @@
     />
     <Labels :count-steps="countSteps"
             :labels="labels"
+            @changeStep="(step)=>$emit('changeStep', step)"
     />
 
   </div>
