@@ -52,7 +52,6 @@ export default {
   methods: {
     ...mapActions(['getItem', 'editItem']),
     onChangeItemField(fieldName, newValue) {
-      console.log('hhh', fieldName, newValue)
       this.editItem({ ...this.item, [fieldName]: newValue });
     }
   },

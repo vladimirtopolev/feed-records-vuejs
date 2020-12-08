@@ -8,6 +8,7 @@
         <div
             class="label"
             v-bind="attrs"
+            :data-testid="`label-${label.test}`"
             v-on="on"
             @click="onChangeStep(label)"
             :style="{left: `${getLabelHorizontalPosition(label.step)}px`}"
