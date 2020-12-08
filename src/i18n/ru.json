@@ -1,0 +1,12 @@
+{
+    "form": {
+        "cancel": "Отменить",
+        "create": "Создать",
+        "prevStep": "Предыдущий шаг",
+        "nextStep": "Следущий шаг"
+    },
+    "recordModule": {
+        "createNewRecordSetModal_btn": "Создать зарпись",
+        "createNewRecordSetModal_title": "Создать запись"
+    }
+}
